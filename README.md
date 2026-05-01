@@ -111,7 +111,15 @@ cd task-management-api
 
 ---
 
-## 2️⃣ Create Virtual Environment
+## 2️⃣ Initialize Project
+
+```bash
+uv init
+```
+
+---
+
+## 3️⃣ Create Virtual Environment
 
 ```bash
 uv venv
@@ -133,7 +141,23 @@ source .venv/bin/activate
 
 ---
 
-## 3️⃣ Install Dependencies
+## 4️⃣ Add FastAPI
+
+```bash
+uv add fastapi[standard]
+```
+
+---
+
+## 5️⃣ Add Required Packages
+
+```bash
+uv add sqlalchemy alembic psycopg2-binary python-jose[cryptography] passlib[bcrypt] python-dotenv
+```
+
+---
+
+## 6️⃣ Install Dependencies
 
 ```bash
 uv sync
@@ -141,29 +165,30 @@ uv sync
 
 ---
 
-# 🔐 Environment Variables
+## 7️⃣ Setup Environment Variables
 
-Create `.env`
+Create `.env` file in the root directory:
 
 ```env
 APP_NAME=Task API
-
 DEBUG=True
-
 DATABASE_URL=postgresql://postgres:password@localhost:5432/taskdb
-
 SECRET_KEY=your_secret_key
-
 ALGORITHM=HS256
-
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 ```
 
 ---
 
-# ▶️ Run Application
+## 8️⃣ Run Database Migrations
 
-## Development Server
+```bash
+uv run alembic upgrade head
+```
+
+---
+
+## 9️⃣ Run Application
 
 ```bash
 uv run uvicorn app.main:app --reload
