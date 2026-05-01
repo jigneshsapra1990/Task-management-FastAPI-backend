@@ -1,7 +1,4 @@
-# FastAPI-backend
-
-
-# 🚀 Task Management API
+# 🚀 Task Management API FastAPI-backend
 
 A scalable task management backend built using FastAPI and UV.
 
