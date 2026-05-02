@@ -14,3 +14,8 @@ def create_task(body: TaskSchema, db: Session = Depends(get_db)):
 @tasks_router.get("/all")
 def get_tasks(db: Session = Depends(get_db)):
     return controller.get_tasks(db)
+
+@tasks_router.get("/{task_id}")
+def get_task(task_id: int, db: Session = Depends(get_db)):
+    return controller.get_task(task_id, db)
+

@@ -18,3 +18,8 @@ def create_task(body: TaskSchema, db:Session):
 def get_tasks(db:Session):
     tasks = db.query(TaskModel).all()
     return tasks    
+
+
+def get_task(task_id: int, db:Session):
+    task = db.query(TaskModel).filter(TaskModel.id == task_id).first()
+    return task
