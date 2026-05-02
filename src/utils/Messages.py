@@ -6,5 +6,12 @@ class Messages:
     TASK_NOT_FOUND = "Task not found"
     TASKS_RETRIEVED = "Tasks retrieved successfully"
     TASK_RETRIEVED = "Task retrieved successfully"
+    User_REGISTERED = "User registered successfully"
+    User_ALREADY_EXISTS = "Email already registered"
+    Username_ALREADY_EXISTS = "Username already taken"
+    User_NOT_FOUND = "User not found"
+    User_LOGGED_IN = "Login successful"
+    
+
 
 messages = Messages()

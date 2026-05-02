@@ -18,5 +18,11 @@ class TaskKeys:
     DUE_DATE = "due_date"
     COMPLETED = "completed"
     IS_COMPLETED = "is_completed"
+    NAME = "name"
+    EMAIL = "email"
+    USERNAME = "username"
+    USER_ID = "user_id"
+    EXPIRES = "exp"
+    ACCESS_TOKEN = "access_token"
 
 Keys = TaskKeys()

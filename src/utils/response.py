@@ -8,6 +8,7 @@ class ApiResponse(BaseModel):
     status: str
     status_code: int
     message: str | None = None
+    access_token: str | None = None
     data: Any = None
 
 
@@ -21,7 +22,8 @@ def api_response(
     success: bool = True,
     message: str | None = None,
     data: Any = None,
-    status_code: int = 200
+    status_code: int = 200,
+    access_token: str | None = None
 ):
     """
     Build a unified API response.
@@ -32,13 +34,17 @@ def api_response(
         status=Keys.SUCCESS if success else Keys.ERROR,
         status_code=status_code,
         message=message,
-        data=data
+        data=data,
+        access_token=access_token
     )
 
-    if not success:
-        raise HTTPException(
-            status_code=status_code,
-            detail=response.model_dump()
-        )
+    result = response.model_dump()
 
-    return response.model_dump()
+    # Remove access_token from response if not provided
+    if access_token is None:
+        result.pop("access_token")
+
+    if not success:
+        raise HTTPException(status_code=status_code, detail=result)
+
+    return result

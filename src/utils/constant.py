@@ -5,6 +5,8 @@ class RoutesPath:
     GET_BY_ID = "/{task_id}"
     UPDATE = "/{task_id}"
     DELETE = "/{task_id}"
+    CREATER_USER = "/register"
+    LOGIN_USER  = "/login"
 
 routes = RoutesPath()
 
