@@ -1,5 +1,9 @@
 from sqlalchemy import Column, Integer, String, Text, DateTime, Boolean
-from src.utils.db import Base
+from sqlalchemy.orm import DeclarativeBase
+
+class Base(DeclarativeBase):
+    pass
+
 class TaskModel(Base):
     __tablename__ = "tasks"
 
