@@ -1,7 +1,8 @@
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
-from src.utils.db import engine
-from src.tasks.models import Base, TaskModel
+from src.utils.db import engine, Base
+from src.tasks.models import TaskModel
+from src.user.models import UserModel
 from src.tasks.router import tasks_router
 from src.user.router import user_routes
 

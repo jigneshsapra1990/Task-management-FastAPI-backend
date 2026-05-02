@@ -12,7 +12,7 @@ tasks_router = APIRouter(prefix="/tasks", tags=["tasks"])
 # Create a new task
 @tasks_router.post(routes.CREATE, status_code=status_code.CREATED )
 def create_task(body: TaskSchema, db: Session = Depends(get_db), user:UserModel =Depends(is_authenticated)):
-    return controller.create_task(body, db)
+    return controller.create_task(body, db,user)
 
 # Get all tasks
 @tasks_router.get(routes.GET_ALL, status_code=status_code.OK)
@@ -27,7 +27,7 @@ def get_task(task_id: int, db: Session = Depends(get_db), user:UserModel =Depend
 # Update a task by ID
 @tasks_router.put(routes.UPDATE, status_code=status_code.OK)
 def update_task(task_id: int, body: TaskSchema, db: Session = Depends(get_db), user:UserModel =Depends(is_authenticated)):
-    return controller.update_task(task_id, body, db)
+    return controller.update_task(task_id, body, db,user)
 
 # Delete a task by ID
 @tasks_router.delete(routes.DELETE, status_code=status_code.OK)
