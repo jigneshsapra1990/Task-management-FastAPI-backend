@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from src.tasks.models import TaskModel
 from fastapi import HTTPException
 from src.utils.Messages import messages
+from src.utils.response import success_response, error_response
 
 def create_task(body: TaskSchema, db:Session):
     new_task = TaskModel(
@@ -14,24 +15,24 @@ def create_task(body: TaskSchema, db:Session):
     db.add(new_task)
     db.commit()
     db.refresh(new_task)
-    return {"message": messages.TASK_CREATED}
+    return success_response(data=new_task, message=messages.TASK_CREATED, status_code=201)
 
 
 def get_tasks(db:Session):
     tasks = db.query(TaskModel).all()
-    return tasks
+    return success_response(data=tasks)
 
 
 def get_task(task_id: int, db:Session):
     task = db.query(TaskModel).filter(TaskModel.id == task_id).first()
     if task is None:
-        raise HTTPException(status_code=404, detail=messages.TASK_NOT_FOUND)
-    return task
+        raise HTTPException(status_code=404, detail=error_response(message=messages.TASK_NOT_FOUND, status_code=404))
+    return success_response(data=task)
 
 def update_task(task_id: int, body: TaskSchema, db:Session):
     task = db.query(TaskModel).filter(TaskModel.id == task_id).first()
     if task is None:
-        raise HTTPException(status_code=404, detail=messages.TASK_NOT_FOUND)
+        raise HTTPException(status_code=404, detail=error_response(message=messages.TASK_NOT_FOUND, status_code=404))
 
     task.title = body.title
     task.description = body.description
@@ -40,13 +41,13 @@ def update_task(task_id: int, body: TaskSchema, db:Session):
 
     db.commit()
     db.refresh(task)
-    return {"message": messages.TASK_UPDATED}
+    return success_response(data=task, message=messages.TASK_UPDATED)
 
 def delete_task(task_id: int, db:Session):
     task = db.query(TaskModel).filter(TaskModel.id == task_id).first()
     if task is None:
-        raise HTTPException(status_code=404, detail=messages.TASK_NOT_FOUND)
+        raise HTTPException(status_code=404, detail=error_response(message=messages.TASK_NOT_FOUND, status_code=404))
 
     db.delete(task)
     db.commit()
-    return {"message": messages.TASK_DELETED}
+    return success_response(message=messages.TASK_DELETED)
