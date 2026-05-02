@@ -22,7 +22,7 @@ def create_task(body: TaskSchema, db: Session):
 def get_tasks(db: Session):
     """Retrieve all tasks from the database."""
     tasks = db.query(TaskModel).all()
-    return api_response(data=[task.to_dict() for task in tasks], status_code=status_code.OK)
+    return api_response(message=messages.TASKS_RETRIEVED, data=[task.to_dict() for task in tasks], status_code=status_code.OK)
 
 
 def get_task(task_id: int, db: Session):
@@ -30,7 +30,7 @@ def get_task(task_id: int, db: Session):
     task = db.query(TaskModel).filter(TaskModel.id == task_id).first()
     if task is None:
         api_response(success=False, message=messages.TASK_NOT_FOUND, status_code=status_code.NOT_FOUND)
-    return api_response(data=task.to_dict(), status_code=status_code.OK)
+    return api_response(message=messages.TASK_RETRIEVED, data=task.to_dict(), status_code=status_code.OK)
 
 def update_task(task_id: int, body: TaskSchema, db: Session):
     """Update an existing task by its ID. Returns 404 if not found."""

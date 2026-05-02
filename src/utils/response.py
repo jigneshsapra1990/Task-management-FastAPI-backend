@@ -41,4 +41,4 @@ def api_response(
             detail=response.model_dump()
         )
 
-    return response
+    return response.model_dump()
