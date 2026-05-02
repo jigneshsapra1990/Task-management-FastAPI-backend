@@ -78,6 +78,54 @@ Install:
 
 ---
 
+# 🐘 Install & Start PostgreSQL
+
+## macOS (Homebrew)
+
+```bash
+brew install postgresql@17
+```
+
+Add to PATH:
+
+```bash
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+```
+
+Start PostgreSQL service:
+
+```bash
+brew services start postgresql@17
+```
+
+Verify:
+
+```bash
+psql --version
+```
+
+## Windows
+
+Download and install from: https://www.postgresql.org/download/windows/
+
+Start PostgreSQL service:
+
+```powershell
+net start postgresql-x64-17
+```
+
+## Create Database
+
+```bash
+psql -U postgres
+```
+
+```sql
+CREATE DATABASE taskdb;
+```
+
+---
+
 # 📦 Install UV
 
 ## macOS / Linux

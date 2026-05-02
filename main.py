@@ -1,8 +1,9 @@
 from fastapi import FastAPI
+from src.utils.db import get_db, Base, engine
+from src.tasks.models import TaskModel
 
-app = FastAPI()
+Base.metadata.create_all(bind=engine)
+
+app = FastAPI(title="Task Management API")
 
 
-@app.get("/")
-def root():
-    return {"message": "Task Management API is running"}
