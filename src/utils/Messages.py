@@ -11,6 +11,8 @@ class Messages:
     Username_ALREADY_EXISTS = "Username already taken"
     User_NOT_FOUND = "User not found"
     User_LOGGED_IN = "Login successful"
+    User_UNAUTHORIZED = "Unauthorized access"
+    User_AUTHENTICATED = "User is authenticated"
     
 
 

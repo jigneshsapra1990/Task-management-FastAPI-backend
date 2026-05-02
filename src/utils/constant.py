@@ -6,7 +6,8 @@ class RoutesPath:
     UPDATE = "/{task_id}"
     DELETE = "/{task_id}"
     CREATER_USER = "/register"
-    LOGIN_USER  = "/login"
+    LOGIN_USER = "/login"
+    IS_AUTHENTICATED = "/is-authenticated"
 
 routes = RoutesPath()
 
