@@ -1,0 +1,16 @@
+from src.tasks.dtos import TaskSchema
+from sqlalchemy.orm import Session
+from src.tasks.models import TaskModel
+
+def create_task(body: TaskSchema, db:Session):
+    print("Creating task with data:", body.model_dump)
+    new_task = TaskModel(
+        title=body.title,
+        description=body.description,
+        due_date=body.due_date,
+        completed=body.is_completed
+    )
+    db.add(new_task)
+    db.commit()
+    db.refresh(new_task)    
+    return {"message": "Create a new task"}
