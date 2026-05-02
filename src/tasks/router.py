@@ -7,5 +7,10 @@ from sqlalchemy.orm import Session
 tasks_router = APIRouter(prefix="/tasks", tags=["tasks"])
 
 @tasks_router.post("/create", response_model=dict)
-def create_task_route(body: TaskSchema, db: Session = Depends(get_db)):
+def create_task(body: TaskSchema, db: Session = Depends(get_db)):
     return controller.create_task(body, db)
+
+
+@tasks_router.get("/all")
+def get_tasks(db: Session = Depends(get_db)):
+    return controller.get_tasks(db)

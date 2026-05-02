@@ -3,7 +3,6 @@ from sqlalchemy.orm import Session
 from src.tasks.models import TaskModel
 
 def create_task(body: TaskSchema, db:Session):
-    print("Creating task with data:", body.model_dump)
     new_task = TaskModel(
         title=body.title,
         description=body.description,
@@ -14,3 +13,8 @@ def create_task(body: TaskSchema, db:Session):
     db.commit()
     db.refresh(new_task)    
     return {"message": "Create a new task"}
+
+
+def get_tasks(db:Session):
+    tasks = db.query(TaskModel).all()
+    return tasks    
