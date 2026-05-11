@@ -367,3 +367,68 @@ Your Company
 # ⭐ Support
 
 If you like this project, give it a ⭐ on GitHub.
+
+---
+
+# 🎤 Interview Preparation
+
+## What is this project?
+
+"I built a **Task Management REST API** using **FastAPI** — a modern Python web framework. It allows users to register, login, and manage their tasks with full CRUD operations."
+
+---
+
+## Tech Stack — How to explain each
+
+- **FastAPI** — "I used FastAPI because it's fast, async-ready, and auto-generates Swagger docs at `/docs`"
+- **PostgreSQL** — "Relational database to store users and tasks"
+- **SQLAlchemy** — "ORM to interact with the database using Python classes instead of raw SQL"
+- **Alembic** — "Database migration tool — when I change a model, I run a migration to update the DB schema"
+- **JWT** — "JSON Web Token for authentication — user logs in, gets a token, and sends it with every request"
+- **Docker** — "Containerized the app so it runs the same on any machine"
+- **UV** — "Modern Python package manager, faster than pip"
+
+---
+
+## Architecture — How to explain
+
+"I followed **clean architecture** — each layer has one responsibility:"
+
+```
+routes      → handles HTTP requests
+controller  → business logic
+models      → database tables
+schemas     → request/response validation (Pydantic)
+repositories → database queries
+```
+
+---
+
+## Controller Code — How to explain
+
+"For example, in my `create_task` function:"
+
+```python
+def create_task(body: TaskSchema, db: Session, user: UserModel):
+    new_task = TaskModel(...)
+    db.add(new_task)
+    db.commit()
+```
+
+"I take validated input from `TaskSchema`, create a `TaskModel` object, save it to the DB, and return a standard API response."
+
+---
+
+## Common Interview Questions
+
+**Q: Why FastAPI over Flask/Django?**
+"FastAPI is faster, has built-in data validation via Pydantic, and auto-generates API docs."
+
+**Q: How does JWT work here?**
+"User logs in → server generates a signed token → client sends token in `Authorization: Bearer <token>` header → server verifies it on each request."
+
+**Q: What is Alembic?**
+"It tracks changes to SQLAlchemy models and generates SQL migration scripts automatically."
+
+**Q: What is dependency injection in FastAPI?**
+"FastAPI's `Depends()` injects things like `db: Session` or the current `user` into route handlers automatically."
